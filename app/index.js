@@ -1,13 +1,17 @@
 import React from "react"
 import ReactDOM from 'react-dom'
-
+import Header from "./src/components/Header"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './src/style/style.css'
+import Home from "./src/components/Home";
 
 class App extends React.Component {
     render() {
         return (
-            <div>
-                <h1>Hello World!</h1>
-            </div>
+            <>
+                <Header />
+                <Home />
+            </>
         );
     }
 }

@@ -12,7 +12,7 @@ module.exports = {
     module: {
         rules: [
             { test: /\.svg$/, use: 'svg-inline-loader' },
-            { test: /\.(js)$/, use: 'babel-loader' },
+            { test: /\.(js|jsx)$/, use: 'babel-loader' },
             { test: /\.css$/, use: ['style-loader', 'css-loader'] }
         ]
     },
