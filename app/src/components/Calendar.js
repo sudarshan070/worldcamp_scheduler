@@ -1,5 +1,6 @@
 import { fromUnixTime, getDate, getDay, getDaysInMonth, getMonth, getYear, isSameDay, isSameMonth, isToday } from 'date-fns'
 import React, { useState } from 'react'
+import EventModal from './EventModal';
 
 const getWeekDetails = (month, year) => {
     let arr = [];
@@ -108,7 +109,10 @@ const Calendar = ({ eventsData }) => {
                                     return <td key={i} className='cal-td text-center border'>
                                         {day ? <>{isTodayDay ? <p className='cal-today-date'>{day}</p> : <p> {day} </p>}
                                             {currentDayEvents.length ?
-                                                currentDayEvents.map(event => <p>{event.title.rendered}</p>) : null}
+                                                currentDayEvents.map(event => <>
+                                                    <EventModal event={event} />
+                                                    {/* <p className='cal-event-title'>{event.title.rendered}</p> */}
+                                                </>) : null}
                                         </> : null}
                                     </td>
                                 })}

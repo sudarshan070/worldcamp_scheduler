@@ -175,13 +175,26 @@ tr:last-child {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: darkblue;
+  background: #1a73e9;
   color: #f1f1f1;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   margin: 0 auto;
 }
+
+.cal-event-title {
+  font-size: 12px;
+  background: #7986cb;
+  color: #f1f1f1;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0.3rem;
+  border-radius: 0.2rem;
+  margin-top: 0.4rem;
+  cursor: pointer;
+}
+
 /* maps */
 .sidebarStyle {
   display: inline-block;
