@@ -143,3 +143,57 @@ body {
 .header {
   background: #f1f1f1;
 }
+
+.cal-table {
+  width: 100%;
+  height: 100%;
+}
+.cal-th {
+  width: 14.285%;
+  height: 3rem;
+  padding-top: 1rem;
+}
+.cal-td {
+  padding-top: 0.6rem;
+  width: 14.285%;
+  height: 6.5rem;
+}
+.cal-year {
+  width: 6rem;
+  height: 30px;
+}
+.cal-month {
+  width: 6rem;
+  height: 30px;
+  margin-left: 0.8rem;
+}
+
+tr:last-child {
+  border-right: 0 !important;
+}
+.cal-today-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: darkblue;
+  color: #f1f1f1;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+/* maps */
+.sidebarStyle {
+  display: inline-block;
+  margin: 12px;
+  background-color: #404040;
+  color: #ffffff;
+  z-index: 1 !important;
+  padding: 6px;
+  font-weight: bold;
+}
+
+.mapContainer {
+  width: 200px;
+  height: 200px;
+}

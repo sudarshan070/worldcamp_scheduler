@@ -3,16 +3,10 @@ import { formatISO, fromUnixTime, startOfMonth } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import React, { useEffect, useState } from 'react'
 import Calendar from './Calendar';
+import Maps from './Maps';
 
 export default function Home() {
     const [eventData, setEventData] = useState([])
-
-    let eventDateArr = []
-
-    eventData && eventData.map(event => (
-        eventDateArr.push(fromUnixTime(event["Start Date (YYYY-mm-dd)"]).toString())
-    ))
-
 
     useEffect(() => {
         const monthStartDate = startOfMonth(new Date())
@@ -30,8 +24,8 @@ export default function Home() {
 
             Promise.all(promiseArr).then(resolvedPromiseArr => {
                 console.log("Data Fetched", resolvedPromiseArr.length)
-                console.log(resolvedPromiseArr.flat())
-                setEventData(resolvedPromiseArr.flat().sort((a, b) => b["Start Date (YYYY-mm-dd)"] - a["Start Date (YYYY-mm-dd)"]))
+                // console.log(resolvedPromiseArr.flat())
+                setEventData(resolvedPromiseArr.flat())
             })
         }).catch(err => console.log(err))
 
@@ -39,13 +33,16 @@ export default function Home() {
 
     return (
         <main className='container-xl pt-4'>
-            <section>
+            <section className='border'>
                 <Calendar eventsData={eventData} />
             </section>
             <section>
                 {
                     eventData ? eventData.length : null
                 } WordCamps
+            </section>
+            <section>
+                <Maps />
             </section>
         </main>
     )
