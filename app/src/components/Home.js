@@ -6,26 +6,34 @@ import Calendar from './Calendar';
 
 export default function Home() {
     const [eventData, setEventData] = useState([])
+    const [isAllDataLoaded, setIsAllDataLoaded] = useState(false)
 
     useEffect(() => {
         const monthStartDate = startOfMonth(new Date())
         const todayDateInISO = monthStartDate.toISOString()
-        axios.get(`https://central.wordcamp.org/wp-json/wp/v2/wordcamps?per_page=1`).then(res => {
+        axios.get(`https://central.wordcamp.org/wp-json/wp/v2/wordcamps?per_page=100&order=desc&page=1`).then(res => {
             // console.log(res.headers["x-wp-totalpages"])
-            const totalpages = res.headers["x-wp-totalpages"]
-            const promiseArr = [];
-            for (let i = 1; i <= Math.ceil(totalpages / 100); i++) {
-                promiseArr.push(axios.get(`https://central.wordcamp.org/wp-json/wp/v2/wordcamps?per_page=100&page=${i}`).then(res => {
-                    // setEventData((data) => data.concat(res.data))
-                    return res.data
-                }).catch(err => console.log(err)))
+            const totalPages = res.headers["x-wp-totalpages"]
+            setEventData(data => data.concat(res.data))
+            console.log(totalPages)
+            if (totalPages >= 2) {
+                const promiseArr = [];
+                for (let i = 2; i <= totalPages; i++) {
+                    // console.log("fetching page", i)
+                    promiseArr.push(axios.get(`https://central.wordcamp.org/wp-json/wp/v2/wordcamps?per_page=100&order=desc&page=${i}`).then(res => {
+                        // setEventData((data) => data.concat(res.data))
+                        setEventData(data => data.concat(res.data))
+                        return res.data
+                    }).catch(err => console.log(err)))
+                }
+                Promise.all(promiseArr).then(resolvedPromiseArr => {
+                    // console.log(resolvedPromiseArr.flat())
+                    setIsAllDataLoaded(true)
+                    // setEventData(resolvedPromiseArr.flat())
+                })
+            } else {
+                setIsAllDataLoaded(true)
             }
-
-            Promise.all(promiseArr).then(resolvedPromiseArr => {
-                console.log("Data Fetched", resolvedPromiseArr.length)
-                // console.log(resolvedPromiseArr.flat())
-                setEventData(resolvedPromiseArr.flat())
-            })
         }).catch(err => console.log(err))
 
     }, [])

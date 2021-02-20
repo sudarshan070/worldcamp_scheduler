@@ -195,18 +195,28 @@ tr:last-child {
   cursor: pointer;
 }
 
-/* maps */
-.sidebarStyle {
-  display: inline-block;
-  margin: 12px;
-  background-color: #404040;
-  color: #ffffff;
-  z-index: 1 !important;
-  padding: 6px;
-  font-weight: bold;
+.cal-btn {
+  width: 36px;
+  height: 36px;
+  outline: none;
+  background: transparent;
+  border: none;
+}
+.cal-btn:hover {
+  border-radius: 50%;
+  background: #f1f1f1;
 }
 
-.mapContainer {
-  width: 200px;
-  height: 200px;
+.cal-upcoming-event {
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+.cal-upcoming-event:hover {
+  background: rgb(41, 41, 41);
+  color: #f1f1f1;
+}
+.cal-upcoming-event-text {
+  font-size: 12px;
 }

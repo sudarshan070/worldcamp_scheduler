@@ -3,7 +3,6 @@ import { GoogleMap, InfoWindow, Marker, withGoogleMap, withScriptjs } from 'reac
 
 
 function Map({ events }) {
-    console.log(events, 'events in map');
     const [inMonthsEvent, setInMonthsEvent] = useState(null)
     return <>
         <GoogleMap
@@ -12,7 +11,6 @@ function Map({ events }) {
         >
             {
                 events && events.map(event => (
-                    // console.log(event._host_coordinates.latitude || event._venue_coordinates.latitude)
                     <Marker
                         key={event.id}
                         position={{
@@ -21,7 +19,6 @@ function Map({ events }) {
                         }}
 
                         onClick={() => {
-                            console.log("event happened");
                             setInMonthsEvent(event)
                         }}
                     />
@@ -40,7 +37,6 @@ function Map({ events }) {
                         }}
                     >
                         <div>
-                            {console.log(inMonthsEvent, 'inMonthsEvent')}
                             <h2>{inMonthsEvent.Location}</h2>
                             <h2>{inMonthsEvent['Host region']}</h2>
                         </div>
