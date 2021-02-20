@@ -3,7 +3,6 @@ import { formatISO, fromUnixTime, startOfMonth } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import React, { useEffect, useState } from 'react'
 import Calendar from './Calendar';
-import Maps from './Maps';
 
 export default function Home() {
     const [eventData, setEventData] = useState([])
@@ -33,7 +32,7 @@ export default function Home() {
 
     return (
         <main className='container-xl pt-4'>
-            <section className='border'>
+            <section >
                 <Calendar eventsData={eventData} />
             </section>
             <section>
@@ -41,9 +40,7 @@ export default function Home() {
                     eventData ? eventData.length : null
                 } WordCamps
             </section>
-            <section>
-                <Maps />
-            </section>
+
         </main>
     )
 }
