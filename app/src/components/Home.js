@@ -15,7 +15,7 @@ export default function Home() {
             // console.log(res.headers["x-wp-totalpages"])
             const totalPages = res.headers["x-wp-totalpages"]
             setEventData(data => data.concat(res.data))
-            console.log(totalPages)
+            // console.log(totalPages)
             if (totalPages >= 2) {
                 const promiseArr = [];
                 for (let i = 2; i <= totalPages; i++) {

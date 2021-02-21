@@ -136,7 +136,7 @@ const Calendar = ({ eventsData }) => {
                                         return <td key={i} className='cal-td text-center border'>
                                             {day ? <>{isTodayDay ? <p className='cal-today-date'>{day}</p> : <p> {day} </p>}
                                                 {currentDayEvents.length ?
-                                                    currentDayEvents.map(event => <>
+                                                    currentDayEvents.map((event) => <>
                                                         <EventModal event={event} />
                                                     </>) : null}
                                             </> : null}

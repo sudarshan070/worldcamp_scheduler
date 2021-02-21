@@ -56,7 +56,7 @@ export default function GMap({ events }) {
         <div>
             <WrappedMap
                 events={events}
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyDdITlvrww0H7WcgStKCRSIS7vUGKStfsk&v=3.exp&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `400px` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
