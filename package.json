@@ -4,10 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "ssr": "webpack --config webpack2.js && babel-node server.js",
+    "start": "webpack --config webpack.config.js && babel-node server.js",
     "test": "jest --config "
-
   },
   "babel": {
     "presets": [

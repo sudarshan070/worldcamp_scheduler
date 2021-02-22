@@ -1,21 +1,29 @@
-const path = require("path");
-const HtmlWebPlugin = require("html-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+/* eslint-disable */
+var webpack = require("webpack");
+var path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-
 module.exports = {
-    entry: './app/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index_bundle.js'
-    },
-
+    mode: "development",
+    devtool: "inline-source-map",
+    entry: ["./app/index.js"],
     module: {
         rules: [
-            { test: /\.svg$/, use: 'svg-inline-loader' },
-            { test: /\.(js|jsx)$/, use: 'babel-loader' },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: { loader: "babel-loader" }
+            },
+            {
+                test: /\.(scss|css)$/,
+                use: [
+                    { loader: MiniCssExtractPlugin.loader },
+                    {
+                        loader: "css-loader"
+                    },
+                    { loader: "sass-loader" }
+                ]
+            },
             {
                 test: /\.(png|jpg|gif)$/,
                 use: [
@@ -27,16 +35,23 @@ module.exports = {
             }
         ]
     },
-    mode: "development",
-
+    resolve: {
+        extensions: [".js", ".jsx"]
+    },
+    output: {
+        filename: "bundle.js",
+        path: __dirname + "/dist/bundle/",
+        publicPath: "/static/"
+    },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: 'app/index.html'
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            "process.env": {
+                NODE_ENV: JSON.stringify("development")
+            }
         }),
         new MiniCssExtractPlugin({
             filename: "bundle.css"
         })
-
     ]
-
-}
+};
