@@ -1,0 +1,1 @@
+export const BASE_API = `https://central.wordcamp.org/wp-json/wp/v2/wordcamps`

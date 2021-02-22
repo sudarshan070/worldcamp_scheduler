@@ -2,7 +2,6 @@ import { addMonths, fromUnixTime, getDate, getDay, getDaysInMonth, getMonth, get
 import React, { useState } from 'react'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import EventModal from './EventModal';
-import GMap from './GMap';
 import UpcomingEvent from './UpcomingEvent';
 
 const getWeekDetails = (month, year) => {
@@ -32,7 +31,7 @@ const getWeekDetails = (month, year) => {
     return arr
 }
 
-const Calendar = ({ eventsData }) => {
+const Calendar = ({ eventsData = [] }) => {
 
     const [month, setMonth] = useState(getMonth(new Date()))
     const [year, setYear] = useState(getYear(new Date()))
@@ -93,7 +92,7 @@ const Calendar = ({ eventsData }) => {
                         <select className='cal-year' value={year} onChange={(e) => setYear(e.target.value)} onBlur={(e) => setYear(e.target.value)}>
                             {
                                 new Array(25).fill(undefined).map((_, i) => {
-                                    return <option value={i + 2003}>
+                                    return <option value={i + 2003} key={i + 2003}>
                                         {i + 2003}
                                     </option>
                                 })
@@ -101,7 +100,7 @@ const Calendar = ({ eventsData }) => {
                         </select>
                         <select className='cal-month' value={month} onChange={(e) => setMonth(e.target.value)} onBlur={(e) => setMonth(e.target.value)}>
                             {new Array(12).fill(undefined).map((_, i) => {
-                                return <option value={i}>
+                                return <option value={i} key={i}>
                                     {monthsArr[i]}
                                 </option>
                             })}
@@ -119,15 +118,15 @@ const Calendar = ({ eventsData }) => {
                                 <th className='cal-th text-center border-right'>Sunday</th>
                                 <th className='cal-th text-center border-right'>Monday</th>
                                 <th className='cal-th text-center border-right'>Tuesday</th>
-                                <th className='cal-th text-center border-right'> Wednesday</th>
+                                <th className='cal-th text-center border-right'>Wednesday</th>
                                 <th className='cal-th text-center border-right'>Thursday</th>
                                 <th className='cal-th text-center border-right'>Friday</th>
                                 <th className='cal-th text-center'>Saturday</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {weekDetails.map((week) => {
-                                return (<tr>
+                            {weekDetails.map((week, i) => {
+                                return (<tr key={i}>
                                     {week.map((day, i) => {
                                         const isTodayDay = isSameDay(new Date(year, month, day), new Date());
                                         const currentDayEvents = eventsInCurrentMonth.filter((event) => {
@@ -137,7 +136,7 @@ const Calendar = ({ eventsData }) => {
                                             {day ? <>{isTodayDay ? <p className='cal-today-date'>{day}</p> : <p> {day} </p>}
                                                 {currentDayEvents.length ?
                                                     currentDayEvents.map((event) => <>
-                                                        <EventModal event={event} />
+                                                        <EventModal key={event.id} event={event} />
                                                     </>) : null}
                                             </> : null}
                                         </td>
@@ -148,9 +147,7 @@ const Calendar = ({ eventsData }) => {
                     </table>
                 </div>
             </div>
-            <div className='mt-5'>
-                <GMap events={eventsInCurrentMonth} />
-            </div>
+
         </>
     )
 }

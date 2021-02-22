@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { formatISO, fromUnixTime, startOfMonth } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import { startOfMonth } from 'date-fns';
 import React, { useEffect, useState } from 'react'
+import { BASE_API } from '../utils/api';
 import Calendar from './Calendar';
+import GMap from './GMap';
 
 export default function Home() {
     const [eventData, setEventData] = useState([])
@@ -11,25 +12,19 @@ export default function Home() {
     useEffect(() => {
         const monthStartDate = startOfMonth(new Date())
         const todayDateInISO = monthStartDate.toISOString()
-        axios.get(`https://central.wordcamp.org/wp-json/wp/v2/wordcamps?per_page=100&order=desc&page=1`).then(res => {
-            // console.log(res.headers["x-wp-totalpages"])
+        axios.get(`${BASE_API}?per_page=100&order=desc&page=1`).then(res => {
             const totalPages = res.headers["x-wp-totalpages"]
             setEventData(data => data.concat(res.data))
-            // console.log(totalPages)
             if (totalPages >= 2) {
                 const promiseArr = [];
                 for (let i = 2; i <= totalPages; i++) {
-                    // console.log("fetching page", i)
-                    promiseArr.push(axios.get(`https://central.wordcamp.org/wp-json/wp/v2/wordcamps?per_page=100&order=desc&page=${i}`).then(res => {
-                        // setEventData((data) => data.concat(res.data))
+                    promiseArr.push(axios.get(`${BASE_API}?per_page=100&order=desc&page=${i}`).then(res => {
                         setEventData(data => data.concat(res.data))
                         return res.data
                     }).catch(err => console.log(err)))
                 }
                 Promise.all(promiseArr).then(resolvedPromiseArr => {
-                    // console.log(resolvedPromiseArr.flat())
                     setIsAllDataLoaded(true)
-                    // setEventData(resolvedPromiseArr.flat())
                 })
             } else {
                 setIsAllDataLoaded(true)
@@ -44,11 +39,10 @@ export default function Home() {
                 <Calendar eventsData={eventData} />
             </section>
             <section>
-                {
-                    eventData ? eventData.length : null
-                } WordCamps
+                <div className='mt-5'>
+                    {isAllDataLoaded ? <GMap events={eventData} /> : <p>Loading All Data...</p>}
+                </div>
             </section>
-
         </main>
     )
 }

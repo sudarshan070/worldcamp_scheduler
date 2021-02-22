@@ -15,7 +15,16 @@ module.exports = {
         rules: [
             { test: /\.svg$/, use: 'svg-inline-loader' },
             { test: /\.(js|jsx)$/, use: 'babel-loader' },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] }
+            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {}
+                    }
+                ]
+            }
         ]
     },
     mode: "development",
