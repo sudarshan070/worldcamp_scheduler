@@ -48,7 +48,7 @@ module.exports = {
     },
 
     output: {
-        filename: "bundle.[hash].js",
+        filename: "bundle.js",
         path: __dirname + '/public/bundle/',
         publicPath: '/public/'
     },
