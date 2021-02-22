@@ -74,7 +74,7 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin({
-            filename: "bundle.[hash].css",
+            filename: "bundle.css",
         }),
 
         new webpack.optimize.AggressiveMergingPlugin(),
