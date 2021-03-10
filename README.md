@@ -18,12 +18,9 @@ For design as in UI/UX, be imaginative.
 
 For CSS feel free to use frameworks.
 
-#### Submission Guidelines
+### Tech
+This is server side application.
+Webpack configuration.
+React
+Test cases using JEST or Enzyme
 
-1. Write test cases using JEST or Enzyme. Your code should have min 60% test coverage.
-
-2. You should not use any React framework. Not even create-react-app.
-
-3. Source Code Hosting ➞ You must use Github (recommended) or Gitlab for source code hosting.
-
-4. App Hosting for demo ➞ As your app work doesn’t have any server-side component development — besides WordCamp site which is already publicly hosted — you should be able to use Github pages. You can even try Vercel or any other hosting of your choice.
