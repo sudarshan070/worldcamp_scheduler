@@ -8,7 +8,7 @@ export default function Header() {
       <div className='container-xl d-flex justify-content-between'>
         {/* <img src={wpLogo} alt='wordpress logo' />
         <img src={rtLogo} alt='rtcamp logo' /> */}
-        <h2>RtCamp</h2>
+        <h2>Calendar</h2>
         <h2>WordPress</h2>
       </div>
     </header>

@@ -43,12 +43,10 @@ const Calendar = ({ eventsData = [] }) => {
     const eventsInCurrentMonth = eventsData.filter((event) => {
         return isSameMonth(new Date(year, month), fromUnixTime(event["Start Date (YYYY-mm-dd)"]))
     })
-    // console.log(eventsInCurrentMonth, eventsData.length)
 
     const upcomingEvents = eventsData.filter((event) => {
         return isFuture(new Date(fromUnixTime(event["Start Date (YYYY-mm-dd)"])))
     })
-    console.log(upcomingEvents.length, 'len');
 
     let previousMonth = () => {
         let date = subMonths(new Date(year, month), 1);

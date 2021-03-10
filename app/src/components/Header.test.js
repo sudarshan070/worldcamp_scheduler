@@ -9,7 +9,7 @@ it("renders without crashing", () => {
 
 it("renders calendar header", () => {
     const wrapper = shallow(<Header />);
-    const firstLogo = <h2>RtCamp</h2>;
+    const firstLogo = <h2>Calendar</h2>;
     const secondLogo = <h2>WordPress</h2>
     expect(wrapper.contains(firstLogo, secondLogo)).toEqual(true);
 });
